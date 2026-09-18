@@ -8,14 +8,44 @@
 </head>
 <body>
 
-<div class="admin-shell">
+<div id="loginView" class="auth-view">
+    <div class="login-card">
+        <span class="eyebrow">GESTOK</span>
+        <h1>Painel administrativo</h1>
+        <p>Entre para administrar as lojas cadastradas.</p>
+
+        <form id="loginForm">
+            <label>
+                E-mail
+                <input id="adminEmail" type="email" autocomplete="username" required>
+            </label>
+
+            <label>
+                Senha
+                <input id="adminSenha" type="password" autocomplete="current-password" required>
+            </label>
+
+            <button id="btnLogin" type="submit" class="primary-button">
+                Entrar
+            </button>
+
+            <div id="loginErro" class="login-error"></div>
+        </form>
+    </div>
+</div>
+
+<div id="adminView" class="admin-shell hidden">
     <header class="admin-header">
         <div>
             <span class="eyebrow">GESTOK</span>
             <h1>Administração</h1>
             <p>Gerencie as lojas cadastradas no sistema.</p>
         </div>
-        <button id="btnAtualizar" class="refresh-button">↻ Atualizar</button>
+
+        <div class="header-actions">
+            <button id="btnAtualizar" class="refresh-button">↻ Atualizar</button>
+            <button id="btnSair" class="logout-button">Sair</button>
+        </div>
     </header>
 
     <main class="admin-content">
@@ -44,7 +74,7 @@
                     <span class="section-label">CADASTROS</span>
                     <h2>Lojas</h2>
                 </div>
-                <span id="statusCarregamento" class="loading-status">Carregando...</span>
+                <span id="statusCarregamento" class="loading-status">Aguardando...</span>
             </div>
 
             <div class="toolbar">
@@ -57,6 +87,8 @@
                     <option value="ativa">Ativa</option>
                     <option value="aguardando_pagamento">Aguardando pagamento</option>
                     <option value="inativa">Inativa</option>
+                    <option value="expirada">Expirada</option>
+                    <option value="cancelada">Cancelada</option>
                 </select>
             </div>
 
@@ -76,7 +108,7 @@
                     </thead>
                     <tbody id="listaLojas">
                         <tr>
-                            <td colspan="8" class="empty-cell">Carregando lojas...</td>
+                            <td colspan="8" class="empty-cell">Entre para carregar as lojas.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -111,15 +143,23 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-<script src="../firebase/config.js"></script>
+
 <script>
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
+const firebaseConfig = {
+    apiKey: "AIzaSyBe-vJ4FVoGHbIWGTRJevsD2wWztITyNU",
+    authDomain: "gestok-3bce2.firebaseapp.com",
+    projectId: "gestok-3bce2",
+    storageBucket: "gestok-3bce2.firebasestorage.app",
+    messagingSenderId: "666747184098",
+    appId: "1:666747184098:web:383688a3c974c00ff30fbb",
+    measurementId: "G-DP56ENDWDV"
+};
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 </script>
-<script src="../firebase/auth.js"></script>
-<script src="../firebase/firestore.js"></script>
-<script src="../auth.js"></script>
+
 <script src="script.js"></script>
 </body>
 </html>
