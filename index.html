@@ -6,46 +6,17 @@
     <title>Gestok | Administração</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-<div id="loginView" class="auth-view">
-    <div class="login-card">
-        <span class="eyebrow">GESTOK</span>
-        <h1>Painel administrativo</h1>
-        <p>Entre para administrar as lojas cadastradas.</p>
-
-        <form id="loginForm">
-            <label>
-                E-mail
-                <input id="adminEmail" type="email" autocomplete="username" required>
-            </label>
-
-            <label>
-                Senha
-                <input id="adminSenha" type="password" autocomplete="current-password" required>
-            </label>
-
-            <button id="btnLogin" type="submit" class="primary-button">
-                Entrar
-            </button>
-
-            <div id="loginErro" class="login-error"></div>
-        </form>
-    </div>
-</div>
-
-<div id="adminView" class="admin-shell hidden">
+<div id="adminView" class="admin-shell">
     <header class="admin-header">
         <div>
             <span class="eyebrow">GESTOK</span>
             <h1>Administração</h1>
-            <p>Gerencie as lojas cadastradas no sistema.</p>
+            <p>Gerencie e acompanhe as lojas cadastradas.</p>
         </div>
 
-        <div class="header-actions">
-            <button id="btnAtualizar" class="refresh-button">↻ Atualizar</button>
-            <button id="btnSair" class="logout-button">Sair</button>
-        </div>
+        <button id="btnAtualizar" class="refresh-button">↻ Atualizar</button>
     </header>
 
     <main class="admin-content">
@@ -74,7 +45,7 @@
                     <span class="section-label">CADASTROS</span>
                     <h2>Lojas</h2>
                 </div>
-                <span id="statusCarregamento" class="loading-status">Aguardando...</span>
+                <span id="statusCarregamento" class="loading-status">Carregando...</span>
             </div>
 
             <div class="toolbar">
@@ -82,6 +53,7 @@
                     <span>⌕</span>
                     <input id="campoBusca" type="search" placeholder="Buscar por loja, código ou e-mail...">
                 </div>
+
                 <select id="filtroStatus">
                     <option value="todos">Todos os status</option>
                     <option value="ativa">Ativa</option>
@@ -108,7 +80,7 @@
                     </thead>
                     <tbody id="listaLojas">
                         <tr>
-                            <td colspan="8" class="empty-cell">Entre para carregar as lojas.</td>
+                            <td colspan="8" class="empty-cell">Carregando lojas...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -161,5 +133,6 @@ if (!firebase.apps.length) {
 </script>
 
 <script src="script.js"></script>
+
 </body>
 </html>

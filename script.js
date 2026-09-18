@@ -3,22 +3,13 @@
    PROJETO SEPARADO DO GESTOK
    ========================================= */
 
-const auth = firebase.auth();
 const db = firebase.firestore();
 
-const loginView = document.getElementById("loginView");
 const adminView = document.getElementById("adminView");
-const loginForm = document.getElementById("loginForm");
-const adminEmail = document.getElementById("adminEmail");
-const adminSenha = document.getElementById("adminSenha");
-const btnLogin = document.getElementById("btnLogin");
-const loginErro = document.getElementById("loginErro");
-
 const listaLojas = document.getElementById("listaLojas");
 const campoBusca = document.getElementById("campoBusca");
 const filtroStatus = document.getElementById("filtroStatus");
 const btnAtualizar = document.getElementById("btnAtualizar");
-const btnSair = document.getElementById("btnSair");
 const statusCarregamento = document.getElementById("statusCarregamento");
 const modalLoja = document.getElementById("modalLoja");
 
@@ -98,13 +89,7 @@ async function carregarResumoLoja(lojaDoc) {
 }
 
 async function carregarLojas() {
-    const usuario = auth.currentUser;
-
-    if (!usuario) {
-        return;
-    }
-
-    statusCarregamento.textContent = "Carregando...";
+statusCarregamento.textContent = "Carregando...";
     listaLojas.innerHTML =
         `<tr><td colspan="8" class="empty-cell">Carregando lojas...</td></tr>`;
 
@@ -373,11 +358,6 @@ btnAtualizar.addEventListener(
     carregarLojas
 );
 
-btnSair.addEventListener(
-    "click",
-    () => auth.signOut()
-);
-
 campoBusca.addEventListener(
     "input",
     renderizarLojas
@@ -407,17 +387,7 @@ document.addEventListener("keydown", event => {
         fecharModal();
     }
 });
-
-auth.onAuthStateChanged(usuario => {
-    if (usuario) {
-        loginView.classList.add("hidden");
-        adminView.classList.remove("hidden");
-        carregarLojas();
-    } else {
-        adminView.classList.add("hidden");
-        loginView.classList.remove("hidden");
-        listaLojas.innerHTML =
-            `<tr><td colspan="8" class="empty-cell">Entre para carregar as lojas.</td></tr>`;
-        statusCarregamento.textContent = "Aguardando login";
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    adminView.classList.remove("hidden");
+    carregarLojas();
 });
