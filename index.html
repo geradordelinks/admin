@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestok | Administração</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="admin-shell">
+    <header class="admin-header">
+        <div>
+            <span class="eyebrow">GESTOK</span>
+            <h1>Administração</h1>
+            <p>Gerencie as lojas cadastradas no sistema.</p>
+        </div>
+        <button id="btnAtualizar" class="refresh-button">↻ Atualizar</button>
+    </header>
+
+    <main class="admin-content">
+        <section class="stats-grid">
+            <article class="stat-card">
+                <span>Total de lojas</span>
+                <strong id="totalLojas">0</strong>
+            </article>
+            <article class="stat-card">
+                <span>Lojas ativas</span>
+                <strong id="lojasAtivas">0</strong>
+            </article>
+            <article class="stat-card">
+                <span>Aguardando pagamento</span>
+                <strong id="lojasPendentes">0</strong>
+            </article>
+            <article class="stat-card">
+                <span>Produtos cadastrados</span>
+                <strong id="totalProdutos">0</strong>
+            </article>
+        </section>
+
+        <section class="panel">
+            <div class="panel-top">
+                <div>
+                    <span class="section-label">CADASTROS</span>
+                    <h2>Lojas</h2>
+                </div>
+                <span id="statusCarregamento" class="loading-status">Carregando...</span>
+            </div>
+
+            <div class="toolbar">
+                <div class="search-wrap">
+                    <span>⌕</span>
+                    <input id="campoBusca" type="search" placeholder="Buscar por loja, código ou e-mail...">
+                </div>
+                <select id="filtroStatus">
+                    <option value="todos">Todos os status</option>
+                    <option value="ativa">Ativa</option>
+                    <option value="aguardando_pagamento">Aguardando pagamento</option>
+                    <option value="inativa">Inativa</option>
+                </select>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Loja</th>
+                            <th>Código</th>
+                            <th>Responsável</th>
+                            <th>E-mail</th>
+                            <th>Produtos</th>
+                            <th>Status</th>
+                            <th>Cadastro</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaLojas">
+                        <tr>
+                            <td colspan="8" class="empty-cell">Carregando lojas...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<div id="modalLoja" class="modal hidden">
+    <div class="modal-backdrop" data-fechar-modal></div>
+    <div class="modal-card">
+        <button class="modal-close" id="fecharModal" aria-label="Fechar">×</button>
+        <span class="section-label">DETALHES DA LOJA</span>
+        <h2 id="modalNome">—</h2>
+        <p id="modalCodigo" class="modal-subtitle">Código: —</p>
+
+        <div class="detail-grid">
+            <div><span>Responsável</span><strong id="modalResponsavel">—</strong></div>
+            <div><span>E-mail</span><strong id="modalEmail">—</strong></div>
+            <div><span>Produtos</span><strong id="modalProdutos">—</strong></div>
+            <div><span>Usuários</span><strong id="modalUsuarios">—</strong></div>
+            <div><span>Movimentações</span><strong id="modalMovimentacoes">—</strong></div>
+            <div><span>Status</span><strong id="modalStatus">—</strong></div>
+            <div><span>Plano</span><strong id="modalPlano">—</strong></div>
+            <div><span>Pagamento</span><strong id="modalPagamento">—</strong></div>
+            <div><span>Vencimento</span><strong id="modalVencimento">—</strong></div>
+            <div><span>UID do proprietário</span><strong id="modalUid">—</strong></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+<script src="../firebase/config.js"></script>
+<script>
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+</script>
+<script src="../firebase/auth.js"></script>
+<script src="../firebase/firestore.js"></script>
+<script src="../auth.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
